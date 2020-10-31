@@ -1119,7 +1119,7 @@ function Player(name, color) {
 	this.chanceJailCard = false;
 	this.bidding = true;
 	this.human = true;
-	// this.AI = null;
+	 //this.AI = null;
 
 	this.pay = function (amount, creditor) {
 		if (amount <= this.money) {
@@ -2543,7 +2543,7 @@ function play() {
 		turn -= pcount;
 	}
 
-	var p = player[turn];
+    var p = player[turn];
 	game.resetDice();
 
 	document.getElementById("pname").innerHTML = p.name;
@@ -2609,23 +2609,61 @@ function play() {
 }
 
 function setup() {
-    pcount = PlayersCount;//parseInt(document.getElementById("playernumber").value, 10);
-    console.log(pcount);
-	var playerArray = new Array(pcount);
+    pcount = PlayersCount;
+	var playerArray = [];
 	var p;
-
     playerArray.randomize();
-    
-    for (i = 0; i < latestPlayers.length;i++) {
-        p = player[playerArray[i - 1]];
-        p.color = latestPlayers[i].color.toLowerCase();
-        p.name = latestPlayers[i].name;
-        p.human = true;
-    }
+    var counter = 1;
+    var html = `<tr id="moneybarrow0" class="money-bar-row">
+                    <td class="moneybararrowcell"><img src="images/arrow.png" id="p0arrow" class="money-bar-arrow" alt=">" /></td>
+                    <td id="p0moneybar" class="moneybarcell">
+                        <div><span id="p0moneyname" >Player 0</span>:</div>
+                        <div>$<span id="p0money">1500</span></div>
+                    </td>
+                </tr>`
+    for (const skt in latestPlayers) {
+        if (latestPlayers.hasOwnProperty(skt)) {
+            var el = latestPlayers[skt];
+            if (latestPlayers[skt].isReady) {
+                
+                if (player[counter] != undefined) {
+                    p = player[counter];
+                } else {
+                    player[counter] = new Player("", "");
+                    player[counter].index = counter;
+                    p = player[counter];
+                }
 
+                p.color = el.color.toLowerCase();
+                p.name = el.name;
+                p.human = (el.name == 'BOT') ? false : true;
+                
+                //Genera holders de puntos
+				
+
+                html += `<tr id="moneybarrow${counter}" class="money-bar-row">
+                            <td class="moneybararrowcell"><img src="images/arrow.png" id="p1arrow" class="money-bar-arrow" alt=">"/></td>
+                            <td id="p${counter}moneybar" class="moneybarcell">
+                                <div><span id="p${counter}moneyname" >Player ${counter}</span>:</div>
+                                <div>$<span id="p${counter}money">1500</span></div>
+                            </td>
+                        </tr>`;
+
+
+            }
+            counter++;
+        }
+    }
+    html += `<tr id="moneybarrow8">
+                <td style="border: none;" class="moneybararrowcell">&nbsp;</td>
+                <td style="border: none;">
+                    <input type="button" id="viewstats" value="View stats" title="View a pop-up window that shows a list of each player's properties." />
+                </td>
+            </tr>`;
+    $('#moneyTbContainer').html(html)
 
 	$("#board, #moneybar").show();
-	//$("#setup").hide();
+	$("#setup").hide();
 
 	if (pcount === 2) {
 		document.getElementById("stats").style.width = "454px";
@@ -2636,7 +2674,7 @@ function setup() {
 	document.getElementById("stats").style.top = "0px";
 	document.getElementById("stats").style.left = "0px";
 
-	//play();
+	play();
 }
 
 // function togglecheck(elementid) {
@@ -2999,9 +3037,5 @@ window.onload = function() {
 		$("#manage").show();
 		$("#buy").hide();
 	});
-
-
 	$("#trade-menu-item").click(game.trade);
-
-
 };

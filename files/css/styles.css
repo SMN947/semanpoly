@@ -1,7 +1,6 @@
 body {
 	background: #FFFFFF;
 	margin: 0px;
-	min-width: 1075px;
 }
 
 td {
@@ -11,10 +10,6 @@ td {
 	text-align: center;
 }
 
-#setup {
-	display: none;
-	margin: 15px;
-}
 
 #moneybar {
 	float: right;
@@ -80,16 +75,7 @@ td {
 }
 
 
-#control {
-	position: absolute;
-	z-index: 9;
-	top: 250px;
-	left: 250px;
-	border: 2px solid black;
-	padding: 10px;
-	display: none;
-	background-color: white;
-}
+
 
 #quickstats {
 	font-size: 12px;
@@ -115,17 +101,6 @@ td {
 	text-align: center;
 }
 
-#alert {
-	width: 307px;
-	height: 92px;
-	margin: 0px;
-	padding-left: 1px;
-	border: 1px solid gray;
-	font-family: Consolas, "Courier New", monospace;
-	font-size: 13px;
-	background-color: #FFFFFF;
-	overflow-y: scroll;
-}
 
 #manage {
 	width: 308px;
@@ -255,7 +230,7 @@ td {
 	background-color: #305BC9;
 	/* background-image: -webkit-linear-gradient(bottom,#213EB2,#4787ED);
 	background-image: -moz-linear-gradient(bottom,#213EB2,#4787ED); */
-	background-image: url(images/menu_background.png);
+	background-image: url(../images/menu_background.png);
 	/* background-repeat: repeat-x; */
 	overflow: hidden;
 }
@@ -523,7 +498,7 @@ td {
 	/* background-image: -webkit-linear-gradient(bottom,#000080,#4787ED);
 	background-image: -moz-linear-gradient(bottom,#000080,#4787ED); */
 
-	background-image: url(images/menu_background_hover.png);
+	background-image: url(../images/menu_background_hover.png);
 }
 
 .menu-item {
@@ -773,7 +748,7 @@ td {
 }
 
 .board-top .cell-owner {
-	background-image: url("images/hori-bar.png");
+	background-image: url("../images/hori-bar.png");
 
 	height: 15px;
 	left: 0px;
@@ -786,7 +761,7 @@ td {
 }
 
 .board-bottom .cell-owner {
-	background-image: url("images/hori-bar.png");
+	background-image: url("../images/hori-bar.png");
 	bottom: -25px;
 
 	height: 15px;
@@ -799,7 +774,7 @@ td {
 }
 
 .board-left .cell-owner {
-	background-image: url("images/vert-bar.png");
+	background-image: url("../images/vert-bar.png");
 
 	height: 68px;
 	left: -25px;
@@ -812,7 +787,7 @@ td {
 }
 
 .board-right .cell-owner {
-	background-image: url("images/vert-bar.png");
+	background-image: url("../images/vert-bar.png");
 
 	height: 68px;
 	right: -25px;

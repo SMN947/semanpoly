@@ -1,12 +1,8 @@
 .Header {
     margin:auto;
 }
-.Header tr td {
-    padding-right: 3em;
-    padding-left: 3em;
-}
 .ConectedList {
-    margin-top:10px;
+    margin:auto;
 }
 .ConectedList, td {
     border: solid 1px black;
@@ -14,4 +10,47 @@
 }
 .ConectedList td {
     padding: 5px;
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+
+.board-left,
+.board-right,
+.board-corner {
+    height: 30px !important;
+}
+.Semanpoly {
+    font-size: 20px;
+    width: auto !important;
+}
+
+#control {
+	top: 250px;
+	left: 250px;
+	border: 2px solid black;
+	padding: 10px;
+	display: none;
+	background-color: white;
+}
+.hidden {
+    display: none;
+}
+#alert{
+    height: 138px;
+    width: calc(100% - 4px);
+	margin: 0px;
+	padding-left: 1px;
+	border: 1px solid gray;
+	font-family: Consolas, "Courier New", monospace;
+	font-size: 13px;
+	background-color: #FFFFFF;
+	overflow-y: scroll;
+}
+.control {
+    width: 100%;
+    border: solid 1px !important;
+}
+.control tr,
+.control tr td{
+    border: solid 1px !important;
 }

@@ -1,4 +1,5 @@
 var express = require('express');
+const { connected } = require('process');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -10,29 +11,45 @@ var messages = [{
     text: "Chat with your playmates :D",
     author: "BOT"
 }];
-var conected = [{
-    name: 'BOT',
-    time: new Date().toLocaleTimeString(),
-    color: '#fdfdfd'
-}]
+
+
+var skts = {
+    'bot': {
+        isReady: true,
+        name: 'BOT1',
+        time: new Date().toLocaleTimeString(),
+        color: '#ff00aa'
+    }
+};
 
 app.use(express.static('files'));
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
+    skts[socket.id] = {
+        isReady: false,
+    }
     console.log('Alguien se ha conectado con Sockets');
     socket.emit('messages', messages);
-    socket.emit('conected', conected);
+    socket.emit('conected', skts);
 
     socket.on('new-conected', (data) => {
         data['time'] = new Date().toLocaleTimeString();
-        conected.push(data);
-        io.sockets.emit('conected', conected);
+        skts[socket.id] = data;
+        io.sockets.emit('conected', skts);
     });
 
     socket.on('new-message', function (data) {
         data['time'] = new Date().toLocaleTimeString();
         messages.push(data);
         io.sockets.emit('messages', messages);
+    });
+
+    socket.on('disconnect', (data) => {
+        console.log(skts[socket.id].name + ' se desconecto')
+        console.log(JSON.stringify(skts));
+        delete skts[socket.id];
+        console.log(JSON.stringify(skts));
+        io.sockets.emit('conected', skts);
     });
 });
 
