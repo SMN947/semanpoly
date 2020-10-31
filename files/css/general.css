@@ -1,0 +1,17 @@
+.Header {
+    margin:auto;
+}
+.Header tr td {
+    padding-right: 3em;
+    padding-left: 3em;
+}
+.ConectedList {
+    margin-top:10px;
+}
+.ConectedList, td {
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+.ConectedList td {
+    padding: 5px;
+}

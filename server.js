@@ -1,29 +1,40 @@
-const express = require('express')
-const port = 3000;
-const app = express()
-const http = require("http").Server(app);
-var io = require('socket.io')(http);
-var socketUsers = require('socket.io.users');
-const path = require('path')
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-app.use(express.static(path.join(__dirname, 'files/')));
+var messages = [{
+    id: 1,
+    time: new Date().toLocaleTimeString(),
+    text: "Chat with your playmates :D",
+    author: "BOT"
+}];
+var conected = [{
+    name: 'BOT',
+    time: new Date().toLocaleTimeString(),
+    color: '#fdfdfd'
+}]
 
-var serverData = {};
+app.use(express.static('files'));
 
-app.listen(port, function () {
-    console.log(': Listening on port', port, '- start:', Date(Date.now()).toString());
+io.on('connection', function(socket) {
+    console.log('Alguien se ha conectado con Sockets');
+    socket.emit('messages', messages);
+    socket.emit('conected', conected);
+
+    socket.on('new-conected', (data) => {
+        data['time'] = new Date().toLocaleTimeString();
+        conected.push(data);
+        io.sockets.emit('conected', conected);
+    });
+
+    socket.on('new-message', function (data) {
+        data['time'] = new Date().toLocaleTimeString();
+        messages.push(data);
+        io.sockets.emit('messages', messages);
+    });
 });
 
-io.on('connection', function (socket) {
-    socket.emit('serverData', serverData);
-    socket.on('new-user', (data) => {
-        serverData[socket.id] = data;
-        io.sockets.emit('serverData', serverData);
-    });
-
-    socket.on("disconnect", () => {
-        delete serverData[socket.id]
-        io.sockets.emit('serverData', serverData);
-        delete serverData[socket.id];
-    });
+server.listen(8080, function() {
+  console.log("Servidor corriendo en http://localhost:8080");
 });
