@@ -1,4 +1,4 @@
-var socket = io.connect('https:semanpoly.herokuapp.com', { 'forceNew': true });
+var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
 var PlayersCount = 0;
 var latestPlayers;
 
