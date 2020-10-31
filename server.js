@@ -4,6 +4,7 @@ const app = express()
 const http = require("http").Server(app);
 var io = require('socket.io')(http);
 var socketUsers = require('socket.io.users');
+const path = require('path');
 
 app.use(express.static(path.join(__dirname, '/files/index.html')));
 
