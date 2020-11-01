@@ -17,7 +17,7 @@
 .board-left,
 .board-right,
 .board-corner {
-    height: 30px !important;
+    height: calc((100vh - 280px) / 10) !important;
 }
 .Semanpoly {
     font-size: 20px;
@@ -25,10 +25,6 @@
 }
 
 #control {
-	top: 250px;
-	left: 250px;
-	border: 2px solid black;
-	padding: 10px;
 	display: none;
 	background-color: white;
 }
@@ -54,4 +50,46 @@
 .control tr,
 .control tr td{
     border: solid 1px !important;
+}
+
+#board {
+	display: none;
+	float: left;
+}
+p, h1 {
+    margin: 5px;
+}
+
+
+.board-top .cell-owner {
+	background-image: url("../images/hori-bar.png");
+	height: 15px;
+	left: 0px;
+	top: 0px;
+	width: 72px;
+}
+
+.board-bottom .cell-owner {
+	background-image: url("../images/hori-bar.png");
+	bottom: 0px;
+	height: 15px;
+	left: 0px;
+	width: 72px;
+}
+
+.board-left .cell-owner {
+	background-image: url("../images/vert-bar.png");
+	height: 68px;
+	left: opx;
+	top: 0px;
+	width: 15px;
+
+}
+
+.board-right .cell-owner {
+	background-image: url("../images/vert-bar.png");
+	height: 68px;
+	right: 0px;
+	top: 0px;
+	width: 15px;
 }

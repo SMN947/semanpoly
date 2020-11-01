@@ -56,13 +56,6 @@ td {
 	margin-left: 10px;
 }
 
-#board {
-	display: none;
-	border: 2px solid black;
-	border-spacing: 3px;
-	margin: 25px;
-	float: left;
-}
 
 #jail {
 	border: 1px solid black;
@@ -745,56 +738,4 @@ td {
 	background-size: cover;
 	display: none;
 	position: absolute;
-}
-
-.board-top .cell-owner {
-	background-image: url("../images/hori-bar.png");
-
-	height: 15px;
-	left: 0px;
-
-
-
-	top: -25px;
-	width: 72px;
-
-}
-
-.board-bottom .cell-owner {
-	background-image: url("../images/hori-bar.png");
-	bottom: -25px;
-
-	height: 15px;
-
-
-
-
-	left: 0px;
-	width: 72px;
-}
-
-.board-left .cell-owner {
-	background-image: url("../images/vert-bar.png");
-
-	height: 68px;
-	left: -25px;
-
-
-
-	top: 0px;
-	width: 15px;
-
-}
-
-.board-right .cell-owner {
-	background-image: url("../images/vert-bar.png");
-
-	height: 68px;
-	right: -25px;
-
-
-
-	top: 0px;
-	width: 15px;
-
 }

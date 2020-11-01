@@ -2671,7 +2671,7 @@ function setup() {
             </tr>`;
     $('#moneyTbContainer').html(html)
 
-	$("#board, #moneybar").show();
+	$("#board, #moneybar, #BoardHolderTR").show();
 	$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder").hide();
 
 	if (pcount === 2) {
