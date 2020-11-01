@@ -1,5 +1,5 @@
-var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
-//var socket = io.connect('http://localhost:8080', { 'forceNew': true });
+//var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
+var socket = io.connect('http://localhost:8080', { 'forceNew': true });
 var PlayersCount = 0;
 var latestPlayers;
 
@@ -54,12 +54,13 @@ function addMessage(e) {
 }
 
 function Conect() {
-  if ($('#MyName').val().length >= 3 || $('#MyName').val().length <= 10) {
+  if ($('#MyName').val().length != '' && ($('#MyName').val().length >= 3 && $('#MyName').val().length <= 10)) {
     var message = {
       isReady: true,
       name: $('#MyName').val(),
       color: $('#MyColor').val()
     };
+    console.log(message)
     $('#ConectBTN').prop('disabled', true);
     $('#MyName').prop('disabled', true);
     

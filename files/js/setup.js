@@ -2548,7 +2548,16 @@ function play() {
 
 	document.getElementById("pname").innerHTML = p.name;
 
-	addAlert("It is " + p.name + "'s turn.");
+    addAlert("It is " + p.name + "'s turn.");
+    //Disables if not is my turn
+    console.log(p.name);
+    console.log($('#MyName').val());
+    console.log(p.name != $('#MyName').val());
+    if (p.name != $('#MyName').val()) {
+        $("#nextbutton").hide();
+    } else {
+        $("#nextbutton").show();
+    }
 
 	// Check for bankruptcy.
 	p.pay(0, p.creditor);
@@ -2663,7 +2672,7 @@ function setup() {
     $('#moneyTbContainer').html(html)
 
 	$("#board, #moneybar").show();
-	$("#setup").hide();
+	$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder").hide();
 
 	if (pcount === 2) {
 		document.getElementById("stats").style.width = "454px";
