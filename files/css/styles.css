@@ -510,7 +510,7 @@ td {
 }
 
 .die {
-	display: none;
+	/*display: none;*/
 	margin: 5px;
 	float: left;
 }

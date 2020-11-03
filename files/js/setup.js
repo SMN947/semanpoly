@@ -37,10 +37,8 @@ function Game() {
 
 	this.getDie = function(die) {
 		if (die === 1) {
-
 			return die1;
 		} else {
-
 			return die2;
 		}
 
@@ -1354,10 +1352,6 @@ function updatePosition() {
 	} else {
 		document.getElementById("cell" + p.position).style.border = "1px solid " + p.color;
 	}
-
-	// for (var i=1; i <= pcount; i++) {
-	// document.getElementById("enlarge"+player[i].position+"token").innerHTML+="<img src='"+tokenArray[i].src+"' height='30' width='30' />";
-	// }
 }
 
 function updateMoney() {
@@ -2554,10 +2548,11 @@ function play() {
     console.log($('#MyName').val());
     console.log(p.name != $('#MyName').val());
     if (p.name != $('#MyName').val()) {
-        $("#nextbutton").hide();
+        $(".DiceHolder").hide();
     } else {
-        $("#nextbutton").show();
+        $(".DiceHolder").show();
     }
+    
 
 	// Check for bankruptcy.
 	p.pay(0, p.creditor);
@@ -2572,8 +2567,8 @@ function play() {
 	document.getElementById("nextbutton").value = "Roll Dice";
 	document.getElementById("nextbutton").title = "Roll the dice and move your token accordingly.";
 
-	$("#die0").hide();
-	$("#die1").hide();
+	//$("#die0").hide();
+	//$("#die1").hide();
 
 	if (p.jail) {
 		$("#landed").show();

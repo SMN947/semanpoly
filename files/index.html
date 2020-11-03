@@ -93,47 +93,21 @@
                                     <tr>
                                         <td colspan="3">
                                             <div>
-                                                <div id="die0" title="Die" class="die die-no-img"></div>
-                                                <div id="die1" title="Die" class="die die-no-img"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="9">
-                                            <hr>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="vertical-align: top; border: none;">
-                                            <div id="quickstats">
-                                                    <div><span id="pname" >Player 1</span>:</div>
-                                                    <div><span id="pmoney">$1500</span></div>
-                                            </div>
-                                            
-                        
-                                        </td>
-                                        <td>
-                                            <div id="landed"></div>
-                                        </td>
-                                        <td style="text-align: left; vertical-align: top; border: none;">
-                                            <div id="manage">
-                                                <div id="option">
-                                                    <div id="buildings" title="Available buildings"></div>
-                                                    <input type="button" value="Buy house" id="buyhousebutton"/>
-                                                    <input type="button" value="Mortgage" id="mortgagebutton" />
-                                                    <input type="button" value="Sell house" id="sellhousebutton"/>
+                                                <div id="die0" title="Die" class="die">
+                                                    <img src="images/Die_1.png" alt="3">
                                                 </div>
-                                                <div id="owned"></div>
+                                                <div id="die1" title="Die" class="die">
+                                                    <img src="images/Die_1.png" alt="3">
+                                                </div>
                                             </div>
                                         </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="border: none">
-                                            <div style="padding-top: 8px;">
-                                                <input type="button" id="nextbutton" title="Roll the dice and move your token accordingly." value="Roll Dice"/>
-                                                <input type="button" id="resignbutton" title="If you cannot pay your debt then you must resign from the game." value="Resign" onclick="game.resign();" />
-                                            </div>
-                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
                                     </tr>
                                 </table>
                             </div>
@@ -209,7 +183,43 @@
     
     
     
+<table style="position: absolute;bottom:0, left:0;">
+    <tr>
 
+    </tr>
+    <tr>
+        <td style="vertical-align: top; border: none;">
+            <div id="quickstats">
+                    <div><span id="pname" >Player 1</span>:</div>
+                    <div><span id="pmoney">$1500</span></div>
+            </div>
+            
+
+        </td>
+        <td>
+            <div id="landed"></div>
+        </td>
+        <td style="text-align: left; vertical-align: top; border: none;">
+            <div id="manage">
+                <div id="option">
+                    <div id="buildings" title="Available buildings"></div>
+                    <input type="button" value="Buy house" id="buyhousebutton"/>
+                    <input type="button" value="Mortgage" id="mortgagebutton" />
+                    <input type="button" value="Sell house" id="sellhousebutton"/>
+                </div>
+                <div id="owned"></div>
+            </div>
+        </td>
+    </tr>
+    <tr class="DiceHolder">
+        <td style="border: none">
+            <div style="padding-top: 8px;">
+                <input type="button" id="nextbutton" title="Roll the dice and move your token accordingly." value="Roll Dice"/>
+                <input type="button" id="resignbutton" title="If you cannot pay your debt then you must resign from the game." value="Resign" onclick="game.resign();" />
+            </div>
+        </td>
+    </tr>
+</table>
    
     
     <div id="moneybarwrap">
@@ -362,6 +372,17 @@
     </table>
 </div>
 
+
+<div class="chat ">
+    <h1>SemanPoly Chat</h1>
+    <hr>
+    <div id="messages"></div>
+    <hr/>
+    <div>
+        <input type="text" id="texto" placeholder="">
+        <button onclick="addMessage()">Send</button>
+    </div>
+</div>
 
 
     

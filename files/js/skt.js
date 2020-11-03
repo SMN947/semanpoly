@@ -14,8 +14,8 @@ socket.on('messages', function(data) {
     }).join(" ");
     
     var elem = document.getElementById('messages');
-    //elem.innerHTML = html;
-    //elem.scrollTop = elem.scrollHeight;
+    elem.innerHTML = html;
+    elem.scrollTop = elem.scrollHeight;
 })
 
 //readyPlayers
