@@ -2736,8 +2736,8 @@ function menuitem_onmouseout(element) {
 }
 
 window.onload = function () {
-	$("#board, #moneybar, #BoardHolderTR").show();
-	$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder").hide();
+	//$("#board, #moneybar, #BoardHolderTR").show();
+	//$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder").hide();
 	game = new Game();
 
 	for (var i = 0; i <= 8; i++) {
