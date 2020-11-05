@@ -9,7 +9,7 @@
 </head>
 <body>
     <table class="Header">
-        <tr>
+        <tr id="Pagetitle">
             <td colspan="2">
                 <center>
                     <h1 class="centered">Welcome to Semanpoly</h1>
@@ -71,7 +71,7 @@
         </tr>
         <tr id="BoardHolderTR" class="hidden">
             <td colspan="2">
-                <table id="board">
+                <table id="board" class="board">
                     <tr>
                         <td class="cell board-corner" id="cell20"></td>
                         <td class="cell board-top" id="cell21"></td>
@@ -87,30 +87,8 @@
                     </tr>
                     <tr>
                         <td class="cell board-left" id="cell19"></td>
-                        <td colspan="9" rowspan="4" class="board-center">
-                            <div id="control">
-                                <table class="control">
-                                    <tr>
-                                        <td colspan="3">
-                                            <div>
-                                                <div id="die0" title="Die" class="die">
-                                                    <img src="images/Die_1.png" alt="3">
-                                                </div>
-                                                <div id="die1" title="Die" class="die">
-                                                    <img src="images/Die_1.png" alt="3">
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <td colspan="9" rowspan="9" class="board-center Semanpoly">
+                            <span>SEMANPOLY</span>
                         </td>
                         <td class="cell board-right" id="cell31"></td>
                     </tr>
@@ -128,24 +106,10 @@
                     </tr>
                     <tr>
                         <td class="cell board-left" id="cell15"></td>
-                        <td class="board-center Semanpoly"><span>S</span></td>
-                        <td class="board-center Semanpoly"><span>E</span></td>
-                        <td class="board-center Semanpoly"><span>M</span></td>
-                        <td class="board-center Semanpoly"><span>A</span></td>
-                        <td class="board-center Semanpoly"><span>N</span></td>
-                        <td class="board-center Semanpoly"><span>P</span></td>
-                        <td class="board-center Semanpoly"><span>O</span></td>
-                        <td class="board-center Semanpoly"><span>L</span></td>
-                        <td class="board-center Semanpoly"><span>Y</span></td>
                         <td class="cell board-right" id="cell35"></td>
                     </tr>
                     <tr>
                         <td class="cell board-left" id="cell14"></td>
-                        <td colspan="9" rowspan="4" class="board-center">
-                            <div id="buy">
-                                <div id="alert"></div>
-                            </div>
-                        </td>
                         <td class="cell board-right" id="cell36"></td>
                     </tr>
                     <tr>
@@ -394,3 +358,34 @@
 <script src="js/ai.js"></script>
 <script src="js/setup.js"></script>
 </html>
+
+
+
+<div id="control">
+    <table class="control">
+        <tr>
+            <td colspan="3">
+                <div>
+                    <div id="die0" title="Die" class="die">
+                        <img src="images/Die_1.png" alt="3">
+                    </div>
+                    <div id="die1" title="Die" class="die">
+                        <img src="images/Die_1.png" alt="3">
+                    </div>
+                </div>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="buy">
+    <div id="alert"></div>
+</div>

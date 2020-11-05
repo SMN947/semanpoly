@@ -44,11 +44,7 @@ function Game() {
 
 	};
 
-
-
 	// Auction functions:
-
-
 
 	var finalizeAuction = function() {
 		var p = player[highestbidder];
@@ -2667,7 +2663,7 @@ function setup() {
     $('#moneyTbContainer').html(html)
 
 	$("#board, #moneybar, #BoardHolderTR").show();
-	$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder").hide();
+	$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder, #Pagetitle").hide();
 
 	if (pcount === 2) {
 		document.getElementById("stats").style.width = "454px";
@@ -2739,7 +2735,9 @@ function menuitem_onmouseout(element) {
 	return;
 }
 
-window.onload = function() {
+window.onload = function () {
+	$("#board, #moneybar, #BoardHolderTR").show();
+	$("#setup, #NameRoom, #BtnConnect, #ConectadosHolder").hide();
 	game = new Game();
 
 	for (var i = 0; i <= 8; i++) {
@@ -2838,6 +2836,9 @@ window.onload = function() {
 		currentCellName.className = "cell-name";
 		currentCellName.textContent = s.name;
 
+		//Aqui partir los nombres :)
+
+
 		if (square[i].groupNumber) {
 			currentCellOwner = currentCellAnchor.appendChild(document.createElement("div"));
 			currentCellOwner.id = "cell" + i + "owner";
@@ -2926,6 +2927,7 @@ window.onload = function() {
 
 		drag = false;
 	});
+
 	document.getElementById("statsdrag").onmousedown = function(e) {
 		dragObj = document.getElementById("stats");
 		dragObj.style.position = "relative";

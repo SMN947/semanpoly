@@ -67,9 +67,6 @@ td {
 	z-index: 2;
 }
 
-
-
-
 #quickstats {
 	font-size: 12px;
 	font-weight: bold;
@@ -535,16 +532,6 @@ td {
 	height: 19px;
 	vertical-align: middle;
 	float: right;
-}
-
-.cell {
-	position: relative;
-	top: 0px;
-	left: 0px;
-	padding: 0px;
-	vertical-align: bottom;
-	background-repeat: no-repeat;
-	background-size: auto 40px;
 }
 
 .board-center {
