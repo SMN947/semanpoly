@@ -1,25 +1,5 @@
-//var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
-var socket = io.connect('http://localhost:8080', { 'forceNew': true });
-var PlayersCount = 0;
-var latestPlayers;
 
-socket.on('messages', function(data) {
-  console.log(data);
-    var html = data.map(function(elem, index) {
-        return(`<div>
-            <strong>${elem.author}</strong> at 
-            <i>${elem.time}</i>:
-            <em>${elem.text}</em>
-            </div>`);
-    }).join(" ");
-    
-    var elem = document.getElementById('messages');
-    elem.innerHTML = html;
-    elem.scrollTop = elem.scrollHeight;
-})
 
-//readyPlayers
-//conectedPlayesr
 socket.on('conected', (data) => {
   //console.log(data)
   latestPlayers = data;
@@ -34,24 +14,12 @@ socket.on('conected', (data) => {
         PlayersCount++;
         html += `<tr><td>${el.name}</td><td><input type="color" value="${el.color}"></td><td>${el.time}</td></tr>`;
       }
-      //console.log(data[skt]);
     }
   }
   $('#ListConectados').html(html);
   $("#conectedPlayesr").html(ConnectedCount)
   $("#readyPlayers").html(PlayersCount)
 })
-
-
-function addMessage(e) {
-  var message = {
-    author: $('#MyName').val(),
-    text: document.getElementById('texto').value,
-  };
-
-  socket.emit('new-message', message);
-  return false;
-}
 
 function Conect() {
   if ($('#MyName').val().length != '' && ($('#MyName').val().length >= 3 && $('#MyName').val().length <= 10)) {

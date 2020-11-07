@@ -1,0 +1,36 @@
+table {
+    width: calc( 100vw - 20px );
+    height: calc(100vh - 20px );
+}
+
+td {
+    border: solid 1px black;
+    width: calc( ( 100vw - 25px ) / 9 );
+    height: calc( ( 100vh - 40px ) / 8 )
+}
+.dados {
+    position: absolute;
+    top: calc( 20px + ( 100vh / 7 ));
+    bottom: calc( 20px + ( 100vh / 7 ));
+    left: calc(0vw + ( 10vw + 20px ));
+    right: 70vw;
+    border: solid 1px red;
+}
+.logo {
+    position: absolute;
+    top: calc( 20px + ( 100vh / 7 ));
+    bottom: calc( 20px + ( 100vh / 7 ));
+    right: calc(0vw + ( 10vw + 20px ));
+    left: 30vw;
+    border: solid 1px red;
+}
+.token {
+    border: solid 1px green;
+    width: 2vw;
+    height: 2vw;
+    display: inline-block;
+    margin: .05vw;
+    position: relative;
+    float: left;
+    border-radius:50%;
+}

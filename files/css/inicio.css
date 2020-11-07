@@ -1,0 +1,106 @@
+body {
+    background: url(../images/patron1.png);
+    background-repeat: repeat;
+}
+.border-top{ 
+    background: url(../images/bar.jpeg);
+    background-repeat: repeat;
+    background-size: contain;
+    top: 10vh;
+    position: absolute;
+    left: 10vw;
+    right: 10vw;
+    height: 4vw;
+}
+.border-bottom {
+    background: url(../images/bar.jpeg);
+    background-repeat: repeat;
+    background-size: contain;
+    bottom: 10vh;
+    position: absolute;
+    left: 10vw;
+    right: 10vw;
+    height: 4vw;
+}
+.circle-tl {
+    position:absolute;
+    top:5vh;
+    left:5vw;
+}
+.circle-tr {
+    position:absolute;
+    top:5vh;
+    right:5vw;    
+}
+.circle-br {
+    position:absolute;
+    bottom:5vh;
+    right:5vw;   
+}
+.circle-bl {
+    position:absolute;
+    bottom:5vh;
+    left:5vw;    
+}
+.circle {
+    background: url(../images/circle.jpeg);
+    width: 16vw;
+    height: 16vw;
+    background-size: cover;
+    border-radius: 50%;
+}
+.circle svg {
+    width: 94%;
+    height: 94%;
+    margin: 5%;
+}
+.vertical {
+    background: url(../images/vertical.jpeg);
+    background-repeat:repeat-y;
+    background-size: contain;
+    position:absolute;
+    top:10vh;
+    bottom:10vh;
+    width:4vw;
+}
+.vertical-l {
+    left:10vw
+}
+.vertical-r {
+    right:10vw;
+}
+.title {
+    position: absolute;
+    bottom:48vh;
+    font-size:7vw;
+    text-align: center;
+    left: 25vw;
+    right: 25vw;
+}
+.desc {
+    position: absolute;
+    bottom:43vh;
+    font-size:3vw;
+    text-align: center;
+    left: 18vw;
+    right: 18vw;
+}
+.nickname {
+    position: absolute;
+    bottom:36vh;
+    font-size:3vw;
+    text-align: center;
+    left: 18vw;
+    right: 18vw;
+}
+.nickname input {
+    text-align: center;
+    font-size:2vw;
+    background: transparent;
+    border: solid #572c13 2px;
+    border-radius: 5px;
+    color: black;
+}
+html, body {
+    border: none;
+}

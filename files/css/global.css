@@ -1,0 +1,11 @@
+html, body {
+    border:none;
+}
+body {
+    background: url(../images/patron1.png);
+    background-repeat: repeat;
+    margin: 10px;
+}
+.hidden {
+    display:none;
+}
