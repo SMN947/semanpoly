@@ -1,6 +1,10 @@
 body {
     background: url(../images/patron1.png);
     background-repeat: repeat;
+    font-family: 'Handlee'
+}
+#cell0 {
+    background: transparent;
 }
 hr {
     margin: .5vh;
@@ -137,8 +141,9 @@ legend {
 }
 .title {
     position: absolute;
+    font-family: 'Frijole';
     bottom:48vh;
-    font-size:7vw;
+    font-size:6vw;
     text-align: center;
     left: 25vw;
     right: 25vw;
@@ -150,6 +155,7 @@ legend {
     text-align: center;
     left: 18vw;
     right: 18vw;
+    font-family: 'Love Ya Like A Sister';
 }
 .nickname {
     position: absolute;
