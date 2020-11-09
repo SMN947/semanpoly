@@ -8,8 +8,8 @@
 <body>
   <div id="Contenedor-Inicio">
 
-    <span class="title">SEMANPOLY</span>
-    <span class="desc">THE FUNNIEST WAY TO PRACTICE</span>
+    <span class="title"></span>
+    <span class="desc"></span>
     <center class="nickname">
       <input type="text" id="Nick" placeholder="Enter your nick name">
     </center>
@@ -22,7 +22,7 @@
       </center>
     </div-->
 
-    <div class="border-top"></div>
+    <div class="border-top" onclick="Admin()"></div>
     <div class="border-bottom"></div>
     <div class="vertical vertical-l"></div>
     <div class="vertical vertical-r"></div>
@@ -44,10 +44,9 @@
   <div id="Contenedor-Juego" class="hidden">
     <table id="tablero"></table>
     <div id="contenido-centro">
-        <div class="dados">
-            <button type="button" id="roll-button">Roll Dice</button>
-    
+        <div class="dados">    
             <div class="dice">
+              <center>
                 <ol class="die-list even-roll" data-roll="1" data-id="0" id="die-1">
                   <li class="die-item" data-side="1">
                     <span class="dot"></span>
@@ -118,11 +117,47 @@
                     <span class="dot"></span>
                   </li>
                 </ol>
+              </center>
               </div>
-        </div>
-        <div class="logo">
-
-        </div>
+        
+              <button type="button" id="roll-button" class="roll-btn" onclick="RollDice()">Roll Dice</button>
+            </div>
+            <div class="logoHolder">
+              <span id="Logo" class="logo"></span>
+              <div class="questionHolder default">
+                <div id="temaHolder">
+                  <span id="tema" class="tema">EL TEMA</span>
+                </div>
+                <div id="Qholder">
+                  <span class="question" id="question">Esta es la pregunta bien aspera</span>
+                </div>
+                <div class="optHolder" id="optHolder">
+                  <hr>
+                    <div id="OptionsHOlder">
+                      
+                    </div>
+                </div>
+                <div id="btnHolder">
+                  <button class="sendAnswer" onclick="sendAnswer()"></button>
+                </div>
+              </div>
+              <div class="ValidationHolder">
+                <span id="ValidationHolderresultado">WRONG</span>
+                <br>
+                <fieldset>
+                  <legend>
+                    Ranking
+                  </legend>
+                  <ol id="Ranking">
+                    <li>Yo - 00000points</li>
+                    <li>Yo - 00000points</li>
+                    <li>Yo - 00000points</li>
+                    <li>Yo - 00000points</li>
+                  </ol>
+                </fieldset>
+                <button class="nextBTN" onclick="SiguienteJugador()">NEXT</button>
+              </div>
+            </div>
     </div>
   </div>
 </body>
@@ -130,6 +165,7 @@
 <link rel="stylesheet" href="css/inicio.css">
 <link rel="stylesheet" href="css/juego.css">
 <link rel="stylesheet" href="css/dados.css">
+<script src="js/textos.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/socket.js"></script>
 <script src="js/tablero.js"></script>

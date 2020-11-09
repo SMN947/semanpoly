@@ -2,11 +2,19 @@ table {
     width: calc( 100vw - 20px );
     height: calc(100vh - 20px );
 }
-
+.Topicsdasdasdadsright {
+    color: black;
+    float: right;
+    text-align: end;
+}
+.Topicsdasdasdadstop {
+    word-spacing: 1px;
+    letter-spacing: 0px;
+}
 td {
     border: solid 1px black;
-    width: calc( ( 100vw - 25px ) / 9 );
-    height: calc( ( 100vh - 40px ) / 8 )
+    width: calc( ( 100vw - 25px ) / 10 );
+    height: calc( ( 100vh - 40px ) / 9 );
 }
 .dados {
     position: absolute;
@@ -14,15 +22,13 @@ td {
     bottom: calc( 20px + ( 100vh / 7 ));
     left: calc(0vw + ( 10vw + 20px ));
     right: 70vw;
-    border: solid 1px red;
 }
-.logo {
+.logoHolder {
     position: absolute;
     top: calc( 20px + ( 100vh / 7 ));
     bottom: calc( 20px + ( 100vh / 7 ));
     right: calc(0vw + ( 10vw + 20px ));
     left: 30vw;
-    border: solid 1px red;
 }
 .token {
     border: solid 1px green;

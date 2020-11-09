@@ -1,5 +1,5 @@
 var express = require('express');
-const { connected } = require('process');
+const { connected, emit } = require('process');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -9,14 +9,130 @@ app.use(express.static('files'));
 
 //Juego
 var game = {
-    jugadores: [
-        new jugador("1", "SMN", 0, 1, 0, 0),
-        new jugador("2", "SMN1"),
-        new jugador("3", "SMN2"),
-        new jugador("4", "SMN3")
-    ],
+    jugadores: {},
     dados: [1, 1],
-    jugadorActual: 0
+    jugadorActual: null,
+    isActive: false,
+    owner: '',
+    topic: null,
+    question: null,
+    questionid: null,
+    respuestas: null,
+    ordenJugadores: [],
+    dado1: null,
+    dado2: null
+}
+var celdas = {
+    1:"GO",
+    2:"Semantics and pragmatics",
+    3:"Language and its characteristics",
+    4:"Grammaticality and acceptability",
+    5:"Word formation",
+    6:"Word collocation",
+    7:"Chance",
+    8:"Word function",
+    9:"Nouns",
+    10:"Adjectives",
+    11:"ESPECIAL",
+    12:"Adverbs",
+    13:"Verbs",
+    14:"Simple sentences",
+    15:"Chance",
+    16:"Compound sentences",
+    17:"Complex sentences",
+    18:"ESPECIAL",
+    19:"Semantics and pragmatics",
+    20:"Language and its characteristics",
+    21:"Grammaticality and acceptability",
+    22:"Word formation",
+    23:"Word collocation",
+    24:"Chance",
+    25:"Word function",
+    26:"Nouns",
+    27:"Adjectives",
+    28:"ESPECIAL",
+    29:"Adverbs",
+    30:"Verbs",
+    31:"Simple sentences",
+    32:"Chance",
+    33:"Compound sentences",
+    34:"Complex sentences"
+}
+var preguntas = {
+    tema1: [
+        {
+            pregunta: "tema1-1De que color es el cielo",
+            respuestas: [
+                {
+                    respuesta: "A Group of words that expresses an independant statement, cuestión, exclamation.",
+                    correcta: true,
+                    feedback: "En efecto es azul"
+                },{
+                    respuesta: "Verde",
+                    correcta: false,
+                    feedback: "El pasto es verde, no el cielo"
+                },{
+                    respuesta: "Rojo",
+                    correcta: false,
+                    feedback: "La sangre es roja, no el cielo"
+                },
+            ]
+        },{
+            pregunta: "tema1-2De que color es el cielo",
+            respuestas: [
+                {
+                    respuesta: "A Group of words that expresses an independant statement, cuestión, exclamation.",
+                    correcta: true,
+                    feedback: "En efecto es azul"
+                },{
+                    respuesta: "Verde",
+                    correcta: false,
+                    feedback: "El pasto es verde, no el cielo"
+                },{
+                    respuesta: "Rojo",
+                    correcta: false,
+                    feedback: "La sangre es roja, no el cielo"
+                },
+            ]
+        }
+    ],
+    tema2: [
+        {
+            pregunta: "tema2-1De que color es el cielo",
+            respuestas: [
+                {
+                    respuesta: "Azul",
+                    correcta: true,
+                    feedback: "En efecto es azul"
+                },{
+                    respuesta: "Verde",
+                    correcta: false,
+                    feedback: "El pasto es verde, no el cielo"
+                },{
+                    respuesta: "Rojo",
+                    correcta: false,
+                    feedback: "La sangre es roja, no el cielo"
+                },
+            ]
+        },{
+            pregunta: "tema2-2De que color es el cielo",
+            respuestas: [
+                {
+                    respuesta: "Azul",
+                    correcta: true,
+                    feedback: "En efecto es azul"
+                },{
+                    respuesta: "Verde",
+                    correcta: false,
+                    feedback: "El pasto es verde, no el cielo"
+                },{
+                    respuesta: "Rojo",
+                    correcta: false,
+                    feedback: "La sangre es roja, no el cielo"
+                },
+            ]
+        }
+    ]
 }
 
 function jugador(id, nombre = 'Visitor', puntos = 0, posicion = 1, correctas = 0, erroneas = 0, color = getRandomColor()) {
@@ -38,25 +154,120 @@ function getRandomColor() {
     return color;
 }
 
-function pregunta(tema, pregunta, opciones, contestada = false, puntos = 5) {
-    this.tema = tema;
-    this.pregunta = pregunta;
-    this.opciones = opciones;
-    this.contestada = contestada;
-    this.puntos = puntos;
+function getRandomNumber(min = 1, max = 6) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 io.on('connection', function (socket) {
+    console.log("con: " + socket.id);
+    io.to(socket.id).emit("handshake", socket.id);
+    socket.on("IAmAdmin", (data) => {
+        game.owner = socket.id;
+        io.to(socket.id).emit("YouReAdmin", "true")
+    });
+    socket.on("registro", (data) => {
+        console.log("New Player");
+        if (!game.isActive) {
+            game.jugadores[socket.id] = new jugador(socket.id, data);
+            game.ordenJugadores.push(socket.id);
+            io.to(socket.id).emit("start", game);
+            io.sockets.emit('pregame-update', game);
+        }
+    });
+    socket.on("StartGame", (data) => {
+        game.jugadorActual = game.owner;
+        io.sockets.emit("GameStarted", game);
+        io.sockets.emit('game-update', game);
+    });
+    socket.on("RollDice", (id) => {
+        if (id == game.jugadorActual) {
+            var die1 = getRandomNumber();
+            var die2 = getRandomNumber();
+            CurrentPlayer("diceRolled", die1, die2);
+            io.sockets.emit("DiceRolled", [die1, die2]);
+            setTimeout(() => {
+                io.sockets.emit('game-update', game);
+            }, 1500);
+        }
+    });
+    socket.on("OptClicked", (val) => {
+        io.sockets.emit("OptWasClicked", [game, val]);
+    });
+    socket.on("Answered", (val) => {
+        var validacion = preguntas[game.topic][game.questionid].respuestas[val].correcta;
+        if (validacion) {
+            console.log(game.jugadores[socket.id].puntos);
+            game.jugadores[socket.id].puntos += 50;
+            console.log(game.jugadores[socket.id].puntos);
+        }
+        io.sockets.emit("AnswerVal", [validacion, game]);
+    });
+    socket.on("SiguienteJugador", (x) => {
+        //Checa si es par PASA LUEGO DE LA RESPUESTA
+        if (game.dado1 != game.dado2) {
+            var next = (game.ordenJugadores).findIndex((el) => el === game.jugadorActual);
+            game.jugadorActual = game.ordenJugadores[((++next > game.ordenJugadores.length - 1) ? 0 : next)];
+            game.question = null;
+            io.sockets.emit('nextPlayer', "");
+            io.sockets.emit('game-update', game);
+        } else {
+            game.question = null;
+            io.sockets.emit('nextPlayer', "");
+            io.sockets.emit('game-update', game);
+        }
+    });
     //socket.emit('game-update', game);
     socket.on('disconnect', (data) => {
+        console.log("des: " + socket.id)
         //console.log(skts[socket.id].name + ' se desconecto')
         //console.log(JSON.stringify(skts));
-       // delete skts[socket.id];
+        delete game.jugadores[socket.id];
+        var temp = []
+        for (i = 0; i < game.ordenJugadores.length; i++) {
+            if (game.ordenJugadores[i] != socket.id) {
+                temp.push(game.ordenJugadores[i]);
+            }
+        }
+        game.ordenJugadores = temp;
+        io.sockets.emit('game-update', game);
+        io.sockets.emit('player-disconected', socket.id);
         //console.log(JSON.stringify(skts));
         //io.sockets.emit('conected', skts);
     });
 });
 
-server.listen(port, function() {
+function CurrentPlayer(action, valor1, valor2) {
+    switch (action) {
+        case "diceRolled":
+            game.jugadores[game.jugadorActual].posicion += (valor1 + valor2);
+            //Revisa que no se pase del tablero
+            if (game.jugadores[game.jugadorActual].posicion > 34) {
+                game.jugadores[game.jugadorActual].posicion = game.jugadores[game.jugadorActual].posicion - 34;
+            }
+            game.dado1 = valor1;
+            game.dado2 = valor2;
+            //Manda pregunta
+            GetQuestion();
+            break;
+    
+        default:
+            break;
+    }
+}
+function GetQuestion(tema = "tema1") {
+    var id = getRandomNumber(0, preguntas[tema].length - 1);
+    var preg = preguntas[tema][id].pregunta;
+    console.log(preg);
+    game.topic = tema;
+    game.question = preg;
+    game.questionid = id;
+    game.respuestas = preguntas[tema][id].respuestas.map((el) => {
+        return el.respuesta;
+    });
+}
+
+server.listen(port, function () {
   console.log("Servidor corriendo en http://localhost:8080");
 });

@@ -2,6 +2,72 @@ body {
     background: url(../images/patron1.png);
     background-repeat: repeat;
 }
+hr {
+    margin: .5vh;
+}
+ol {
+    font-size: 20px;
+}
+legend {
+    font-size: 25px;
+}
+.nextBTN {
+    font-size: 3vw;
+    background: #6a3d12;
+}
+.error {
+    background: #963434;
+    padding: 10px;
+}
+.success {
+    background:#22712a;
+    padding: 10px;
+}
+#Qholder {
+    /* height: calc((100% - 80px) - 8.2vw); */
+}
+.optHolder {
+    font-size: 1.5vw;
+}
+#btnHolder {
+}
+#btnHolder button {
+    width: calc((100% - 12vw) - 24px);
+    position: absolute;
+    bottom: 1vh;
+    font-size: 3vw;
+    background: #6a3d12;
+}
+#temaHolder {
+    width: 100%;
+    text-align: center;
+    font-size: 3vw;
+    background: #3b3b93;
+    color:  white;
+    border: solid 1px black;
+}
+.questionHolder {
+    margin-left: 6vw;
+    margin-right: 6vw;
+    height: 60vh;
+    text-align:justify;
+    border:  solid 1px black;
+    background: #9b9383;
+    padding:2vh;
+    display:none;
+}
+.ValidationHolder{
+    margin-left: 6vw;
+    margin-right: 6vw;
+    text-align:justify;
+    padding:2vh;
+    font-size: 5vw;
+    text-align: center;
+    bottom: 4vh;
+    position: absolute;
+    right: 6vw;
+    display: none;
+}
 .border-top{ 
     background: url(../images/bar.jpeg);
     background-repeat: repeat;
@@ -101,6 +167,22 @@ body {
     border-radius: 5px;
     color: black;
 }
+.roll-btn {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-size: 3vw;
+    background: #6a3d12;
+}
 html, body {
     border: none;
+}
+.logo {
+    position: absolute;
+    top: 25vh;
+    font-size: 6vw;
+    transform: rotateZ(-35deg);
+    color: #ffffff35;
+    width: 100%;
+    text-align: center;
 }
