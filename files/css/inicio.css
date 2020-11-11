@@ -40,6 +40,7 @@ legend {
     position: absolute;
     bottom: 1vh;
     font-size: 3vw;
+    z-index: 99999999999999999;
     background: #6a3d12;
 }
 #temaHolder {
@@ -56,7 +57,7 @@ legend {
     height: 60vh;
     text-align:justify;
     border:  solid 1px black;
-    background: #9b9383;
+    background: #9b938373;
     padding:2vh;
     display:none;
 }
@@ -143,21 +144,21 @@ legend {
     position: absolute;
     font-family: 'Frijole';
     bottom:48vh;
-    font-size:6vw;
+    font-size:7vw;
     text-align: center;
-    left: 25vw;
+    left: 19.5vw;
     right: 25vw;
 }
 .desc {
     position: absolute;
-    bottom:43vh;
-    font-size:3vw;
+    bottom:42vh;
+    font-size:4vw;
     text-align: center;
     left: 18vw;
     right: 18vw;
     font-family: 'Love Ya Like A Sister';
 }
-.nickname {
+#goSettings {
     position: absolute;
     bottom:36vh;
     font-size:3vw;
@@ -182,13 +183,18 @@ legend {
 }
 html, body {
     border: none;
+    overflow: hidden;
 }
 .logo {
-    position: absolute;
-    top: 25vh;
+    position: fixed;
+    top: 39vh;
     font-size: 6vw;
+    left: 33vw;
+    z-index: -1;
     transform: rotateZ(-35deg);
     color: #ffffff35;
-    width: 100%;
+    /* width: 48%; */
+    padding: 0px;
     text-align: center;
+    border: 1px solid;
 }

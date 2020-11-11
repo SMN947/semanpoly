@@ -178,6 +178,8 @@ io.on('connection', function (socket) {
     });
     socket.on("StartGame", (data) => {
         game.jugadorActual = game.owner;
+        var next = (game.ordenJugadores).findIndex((el) => el === game.jugadorActual);
+        game.jugadorActual = game.ordenJugadores[((++next > game.ordenJugadores.length - 1) ? 0 : next)];
         io.sockets.emit("GameStarted", game);
         io.sockets.emit('game-update', game);
     });
@@ -209,6 +211,11 @@ io.on('connection', function (socket) {
         if (game.dado1 != game.dado2) {
             var next = (game.ordenJugadores).findIndex((el) => el === game.jugadorActual);
             game.jugadorActual = game.ordenJugadores[((++next > game.ordenJugadores.length - 1) ? 0 : next)];
+            if (game.jugadorActual == game.owner) {
+                console.log("Admin No juega, siguiente");
+                var next = (game.ordenJugadores).findIndex((el) => el === game.jugadorActual);
+                game.jugadorActual = game.ordenJugadores[((++next > game.ordenJugadores.length - 1) ? 0 : next)];
+            }
             game.question = null;
             io.sockets.emit('nextPlayer', "");
             io.sockets.emit('game-update', game);

@@ -3,11 +3,12 @@ $(".title, #Logo").html(textos.nombre);
 $(".desc").html(textos.eslogan);
 $("#roll-button").html(textos.roll_dice);
 $(".sendAnswer").html(textos.sendanswer)
+$("#goSettings").html(textos.settings);
 var sktid = '';
 var firstTime = true;
 
-var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
-//var socket = io.connect('http://localhost:8080', { 'forceNew': true });
+//var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
+var socket = io.connect('http://localhost:8080', { 'forceNew': true });
 
 socket.on("handshake", (id) => {
     sktid = id;
@@ -19,7 +20,7 @@ socket.on("game-update", (game) => {
     renderGame(game)
 });
 socket.on("YouReAdmin", (data) => {
-    console.log(textos.admin);
+    alert(textos.admin);
 });
 socket.on("start", (game) => {
     if (game.owner == sktid) {
@@ -76,8 +77,10 @@ socket.on("AnswerVal", (data) => {
     var rank = '';
     for (const jugador in data[1].jugadores) {
         if (data[1].jugadores.hasOwnProperty(jugador)) {
-            const jug = data[1].jugadores[jugador];
-            rank += `<li>${jug.nombre} - ${jug.puntos} points</li>`
+            if (data[1].owner != data[1].jugadores[jugador].id) {
+                const jug = data[1].jugadores[jugador];
+                rank += `<li>${jug.nombre} - ${jug.puntos} points</li>`
+            }
         }
     }
     $("#Ranking").html(rank)
@@ -103,8 +106,10 @@ function renderGame(game) {
     for (const key in game.jugadores) {
         if (game.jugadores.hasOwnProperty(key)) {
             const jugador = game.jugadores[key];
-            $(`#jugador${jugador.id}`).remove();
-            $(`#cell${jugador.posicion}`).append(`<div id="jugador${jugador.id}" class="token" style="background: ${jugador.color}"></div>`)
+            if (jugador.id != game.owner) {
+                $(`#jugador${jugador.id}`).remove();
+                $(`#cell${jugador.posicion}`).append(`<div id="jugador${jugador.id}" class="token" style="background: ${jugador.color}"></div>`)
+            }
         }
     }
     if (game.question != null) {

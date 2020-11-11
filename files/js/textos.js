@@ -9,5 +9,6 @@ var textos = {
     sendanswer: "Send Answer",
     option_required: "Please choose an option",
     answer_ok: "SUCCESS",
-    answer_wrong: "ERROR"
+    answer_wrong: "ERROR",
+    settings: "Please go to the settings section"
 }

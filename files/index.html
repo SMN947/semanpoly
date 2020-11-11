@@ -11,6 +11,9 @@
 
     <span class="title"></span>
     <span class="desc"></span>
+    <center>
+      <span id="goSettings"></span>
+    </center>
     <center class="nickname">
       <input type="text" id="Nick" placeholder="Enter your nick name">
     </center>
@@ -124,7 +127,7 @@
               <button type="button" id="roll-button" class="roll-btn" onclick="RollDice()">Roll Dice</button>
             </div>
             <div class="logoHolder">
-              <span id="Logo" class="logo"></span>
+              
               <div class="questionHolder default">
                 <div id="temaHolder">
                   <span id="tema" class="tema">EL TEMA</span>
@@ -134,6 +137,7 @@
                 </div>
                 <div class="optHolder" id="optHolder">
                   <hr>
+                  <span id="Logo" class="logo"></span>
                     <div id="OptionsHOlder">
                       
                     </div>
@@ -161,13 +165,64 @@
             </div>
     </div>
   </div>
+
+  <div class="Tutorial">
+    <div class="book">
+      <input type="radio" name="page" id="page-1" checked />
+      <label class="page cover" for="page-3">
+        <h1>SEMANPOLY<br>
+          <h3>How to play</h3>
+        </h1><br>
+        <h4>By Jenni Ramos</h4>
+      </label>
+      <label class="page cover" for="page-1"></label>
+      <input type="radio" name="page" id="page-3" />
+      <label class="page" for="page-5">
+        <h2>What is SEMANPOLY</h2>
+        <p>
+          <img src="https://i.ibb.co/Z8k31pT/Captura-de-pantalla-2020-11-10-222959.png">
+        </p>
+        <p>
+          Here you will explain what is SEMANPOLY, why this board game, how this will help you to learn in a very interactive way.
+        </p>
+      </label>
+    
+      <label class="page" for="page-3">
+        <h2>Before Start</h2>
+        <p>Go to the settings section in the bottom-left icon to enter your nick name and choose your token.</p>
+        <img src="https://i.ibb.co/kGkxwSk/settings.png" class="SettingsBTN"> Settings button
+      </label>
+      <input type="radio" name="page" id="page-5" />
+      <label class="page" for="page-7">
+        <p>Castles, kings and princesses ...</p>
+      </label>
+      <label class="page" for="page-5">
+        <p>Love and war ...</p>
+      </label>
+      <input type="radio" name="page" id="page-7" />
+      <label class="page" for="page-9">
+        <p>Mystery and intrigue ...</p>
+      </label>
+      <label class="page" for="page-7">
+        <p>And ultimately, betrayal.</p>
+        <p>The end.</p>
+      </label>
+      <input type="radio" name="page" id="page-9" />
+      <label class="page cover" for="page-11"></label>
+      <label class="page cover" for="page-9"></label>
+      <input type="radio" name="page" id="page-11" />
+    </div>
+  </div>
+
 </body>
 <link rel="stylesheet" href="css/global.css">
 <link rel="stylesheet" href="css/inicio.css">
 <link rel="stylesheet" href="css/juego.css">
 <link rel="stylesheet" href="css/dados.css">
+<link rel="stylesheet" href="css/libro.css">
 <script src="js/textos.js"></script>
 <script src="js/jquery.js"></script>
+<script src="js/oridomi.js"></script>
 <script src="js/socket.js"></script>
 <script src="js/tablero.js"></script>
 <script src="js/dados.js"></script>

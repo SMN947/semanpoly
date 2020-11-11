@@ -13,7 +13,7 @@ table {
 }
 td {
     border: solid 1px black;
-    background: red;
+    background: #77471aa6;
     width: calc( ( 100vw - 25px ) / 10 );
     height: calc( ( 100vh - 40px ) / 9 );
 }

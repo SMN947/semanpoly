@@ -1,5 +1,3 @@
-
-
 socket.on('conected', (data) => {
   //console.log(data)
   latestPlayers = data;
