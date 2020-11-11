@@ -2,6 +2,30 @@ table {
     width: calc( 100vw - 20px );
     height: calc(100vh - 20px );
 }
+.PlayersControl {
+    display: none;
+    position: absolute;
+    top: 21vh;
+    background: #75411e87;
+    bottom: 21vh;
+    border-radius: 20px;
+    right: 18vw;
+    left: 18vw;
+}
+.PlayersControl table{
+    position: relative;
+    top: 15vh;
+    left: 0vw;
+    right: 10vw;
+    width: 100%;
+    margin: -100px;
+    /* margin-left: 9vw; */
+    /* width: calc(100% - 18vw); */
+    border:  solid 1px red;
+}
+.PlayersControl table thead th td{
+    width: auto !important;
+}
 .SelectedToken {
     bottom: 17vh;
     left: 4vh;
@@ -52,6 +76,18 @@ table {
 .TablaSettings td table tr td{
     /*border: solid 1px red;*/
 }
+.ControlToken {
+    width: 30px;
+    border-radius: 50%;
+}
+.btnPlayersHabilitados {
+    width: 50%;
+    bottom: 0;
+    right: 0vw;
+    position: absolute;
+    font-size: 3vw;
+    background: #6a3d12;
+}
 .settings {
     display: none;
     position: absolute;
@@ -62,6 +98,9 @@ table {
 
     right: 10vw;
     left: 10vw;
+}
+.full-width td {
+    width: 100%;
 }
 .Topicsdasdasdadsright {
     color: black;

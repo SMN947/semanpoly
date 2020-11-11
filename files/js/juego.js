@@ -20,9 +20,7 @@ socket.on("Registrado", (game) => {
     $("#Settings").hide();
     $("#goSettings").html(textos.waiting_for_host);
 });
-function OpenSettings() {
-    $("#Settings").show();
-}
+
 socket.on("game-update", (game) => {
     //console.clear();
     console.log("GameUpdate")
@@ -103,9 +101,24 @@ socket.on("nextPlayer", (data) => {
 socket.on("player-disconected", (data) => {
     $(`#jugador${data}`).remove();
 });
-socket.on("pregame-update", (data) => {
-    //TODO pregame update
+socket.on("pregame-update", (game) => {
+    console.log(game.jugadores);
+    var html = '';
+    for (const key in game.jugadores) {
+        if (game.jugadores.hasOwnProperty(key)) {
+            const jugador = game.jugadores[key];
+            var checked = (jugador.habilitado) ? 'checked' : "";
+            html += `<li><input type="checkbox" onchange="PlayerStatusUpdated('${jugador.id}')" ${checked}><img src="./images/${jugador.token}.jpg" class="ControlToken" alt=""> - ${jugador.nombre}</li>`;
+        }
+    }
+    $("#ListaJugadoresControl").html(html);
 });
+function SavePlayersHabilitados() {
+    $("#PlayersControl").hide()
+}
+function PlayerStatusUpdated(id) {
+    socket.emit("Changeplayerstatus", id);
+}
 function nameAlreadyUsed(name) {
     alert(textos.name_already_taken.replace("$$", name));
 }
@@ -113,32 +126,45 @@ function SiguienteJugador() {
     socket.emit("SiguienteJugador");
     $(".ValidationHolder").show();
 }
+var esEspecial = null;
 function renderGame(game) {
+    esEspecial = game;
     for (const key in game.jugadores) {
         if (game.jugadores.hasOwnProperty(key)) {
             const jugador = game.jugadores[key];
             if (jugador.id != game.owner) {
                 $(`#jugador${jugador.id}`).remove();
-                $(`#cell${jugador.posicion}`).append(`<div id="jugador${jugador.id}" class="token" style="background: ${jugador.color}"></div>`)
+                $(`#cell${jugador.posicion}`).append(`<div id="jugador${jugador.id}" class="token" style="background:url(./images/${jugador.token}.jpg)"></div>`)
             }
         }
     }
     if (game.question != null) {
         $("#tema").html(game.topic);
         $("#question").html(game.question);
-        var options = `<label onclick="OptClicked(1)"><input type="radio" name="answer" id="answer1" value="0">A - <span id="opt1">Opcion 1</span></label><br>
-        <label onclick="OptClicked(2)"><input type="radio" name="answer" id="answer2" value="1">B - <span id="opt2">Opcion 2</span></label><br>
-        <label onclick="OptClicked(3)"><input type="radio" name="answer" id="answer3" value="2">C - <span id="opt3">Opcion 3</span></label><br>`;
-        $("#OptionsHOlder").html(options);
-        for (i = 1; i <= game.respuestas.length; i++) {
-            console.log(game.respuestas);
-            console.log(i);
-            console.log(game.respuestas[i]);
-            $(`#opt${i}`).html(game.respuestas[i-1]);
+        var tema = game.topic;
+        if (tema != 'Turn Loose'&&tema != 'Free Parking' && tema != 'Random Question Land' && tema != 'GO') {
+            var options = `<label onclick="OptClicked(1)"><input type="radio" name="answer" id="answer1" value="0">A - <span id="opt1">Opcion 1</span></label><br>
+            <label onclick="OptClicked(2)"><input type="radio" name="answer" id="answer2" value="1">B - <span id="opt2">Opcion 2</span></label><br>
+            <label onclick="OptClicked(3)"><input type="radio" name="answer" id="answer3" value="2">C - <span id="opt3">Opcion 3</span></label><br>`;
+            $("#OptionsHOlder").html(options);
+            for (i = 1; i <= game.respuestas.length; i++) {
+                console.log(game.respuestas);
+                console.log(i);
+                console.log(game.respuestas[i]);
+                $(`#opt${i}`).html(game.respuestas[i-1]);
+            }
+            $(".questionHolder").show();
+            $("#Qholder").css("height", `calc((100% - ${$("#optHolder").height()}px) - 8.2vw)`);
+            $(".sendAnswer").html(textos.sendanswer)
+        } else {
+            
+            $(".sendAnswer").html('NEXT')
+            $("#tema").html(game.topic);
+            $("#question").html(game.question);
+            $("#OptionsHOlder").html('');
+            
+            $(".questionHolder").show();
         }
-        $(".questionHolder").show();
-        $("#Qholder").css("height", `calc((100% - ${$("#optHolder").height()}px) - 8.2vw)`);
-        //calcular height del opt holder | |    height: ;
     } else {
         $(".questionHolder").hide();
     }
@@ -157,11 +183,19 @@ function renderGame(game) {
     }
 }
 function sendAnswer() {
-    var radioValue = $("input[name='answer']:checked").val();
-    if (radioValue) {
-        socket.emit("Answered", radioValue);
+    var game = esEspecial;
+    var tema = game.topic;
+    if (tema != 'Turn Loose'&&tema != 'Free Parking' && tema != 'Random Question Land' && tema != 'GO') {
+        var radioValue = $("input[name='answer']:checked").val();
+        if (radioValue) {
+            socket.emit("Answered", radioValue);
+        } else {
+            alert(textos.option_required);
+        }
     } else {
-        alert(textos.option_required);
+        socket.emit("SiguienteJugador");
+        
+        $(".questionHolder").hide();
     }
 }
 function OptClicked(val) {
@@ -169,12 +203,23 @@ function OptClicked(val) {
 }
 
 var token = null;
+var nickname = null;
 function Token(tkn) {
     if (token != null) {
         $(`#OK${token}`).hide();
     }
     $(`#OK${tkn}`).show();
     token = tkn;
+}
+
+function OpenSettings() {
+    if (token == null && nickname == null) {
+        $("#Settings").show();
+    } else {
+        if (admin) {
+            $("#PlayersControl").show();
+        }
+    }
 }
 function SaveNameToken() {
     var this_token = '';
