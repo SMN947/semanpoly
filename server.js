@@ -59,85 +59,130 @@ var celdas = {
     34:"Complex sentences"
 }
 var preguntas = {
-    tema1: [
+    "Semantics and pragmatics": [
         {
-            pregunta: "tema1-1De que color es el cielo",
-            respuestas: [
+            "pregunta": "Semantics is:",
+            "respuestas": [
                 {
-                    respuesta: "A Group of words that expresses an independant statement, cuestión, exclamation.",
-                    correcta: true,
-                    feedback: "En efecto es azul"
+                    "respuesta": "The study of the word.",
+                    "correcta": false
                 },{
-                    respuesta: "Verde",
-                    correcta: false,
-                    feedback: "El pasto es verde, no el cielo"
+                    "respuesta": "The study of meaning.",
+                    "correcta": true
                 },{
-                    respuesta: "Rojo",
-                    correcta: false,
-                    feedback: "La sangre es roja, no el cielo"
-                },
+                    "respuesta": "The study of the human body.",
+                    "correcta": false
+                }
             ]
         },{
-            pregunta: "tema1-2De que color es el cielo",
-            respuestas: [
+            "pregunta": "We use an ___ to express an idea or a feeling in spoken words.",
+            "respuestas": [
                 {
-                    respuesta: "A Group of words that expresses an independant statement, cuestión, exclamation.",
-                    correcta: true,
-                    feedback: "En efecto es azul"
+                    "respuesta": "Adjective",
+                    "correcta": false
                 },{
-                    respuesta: "Verde",
-                    correcta: false,
-                    feedback: "El pasto es verde, no el cielo"
+                    "respuesta": "Verb",
+                    "correcta": false
                 },{
-                    respuesta: "Rojo",
-                    correcta: false,
-                    feedback: "La sangre es roja, no el cielo"
-                },
+                    "respuesta": "Utterance",
+                    "correcta": true
+                }
+            ]
+        },{
+            "pregunta": "What type of word is best classified using semantic features?",
+            "respuestas": [
+                {
+                    "respuesta": "Noun",
+                    "correcta": true
+                },{
+                    "respuesta": "Common",
+                    "correcta": false
+                },{
+                    "respuesta": "Verb",
+                    "correcta": false
+                }
+            ]
+        },{
+            "pregunta": "What is the diference between semantics and pragmatic?",
+            "respuestas": [
+                {
+                    "respuesta": "Semantics is the study of the context and pragmatic is the study of the words",
+                    "correcta": false
+                },{
+                    "respuesta": "Semantics is the study of meanings and pragmatic is the study of the way context can be influence our knowledge of linguistics",
+                    "correcta": true
+                },{
+                    "respuesta": "Semantics is the study of vocabulary and pragmatic is the study of the way context can be influence our knowledge of the life",
+                    "correcta": false
+                }
             ]
         }
     ],
-    tema2: [
+    "tema": [
         {
-            pregunta: "tema2-1De que color es el cielo",
-            respuestas: [
+            "pregunta": "pregunta",
+            "respuestas": [
                 {
-                    respuesta: "Azul",
-                    correcta: true,
-                    feedback: "En efecto es azul"
+                    "respuesta": "algo",
+                    "correcta": true
                 },{
-                    respuesta: "Verde",
-                    correcta: false,
-                    feedback: "El pasto es verde, no el cielo"
+                    "respuesta": "Verde",
+                    "correcta": false
                 },{
-                    respuesta: "Rojo",
-                    correcta: false,
-                    feedback: "La sangre es roja, no el cielo"
-                },
+                    "respuesta": "Rojo",
+                    "correcta": false
+                }
             ]
         },{
-            pregunta: "tema2-2De que color es el cielo",
-            respuestas: [
+            "pregunta": "pregunta",
+            "respuestas": [
                 {
-                    respuesta: "Azul",
-                    correcta: true,
-                    feedback: "En efecto es azul"
+                    "respuesta": "algo",
+                    "correcta": true
                 },{
-                    respuesta: "Verde",
-                    correcta: false,
-                    feedback: "El pasto es verde, no el cielo"
+                    "respuesta": "Verde",
+                    "correcta": false
                 },{
-                    respuesta: "Rojo",
-                    correcta: false,
-                    feedback: "La sangre es roja, no el cielo"
-                },
+                    "respuesta": "Rojo",
+                    "correcta": false
+                }
+            ]
+        },{
+            "pregunta": "pregunta",
+            "respuestas": [
+                {
+                    "respuesta": "algo",
+                    "correcta": true
+                },{
+                    "respuesta": "Verde",
+                    "correcta": false
+                },{
+                    "respuesta": "Rojo",
+                    "correcta": false
+                }
+            ]
+        },{
+            "pregunta": "pregunta",
+            "respuestas": [
+                {
+                    "respuesta": "algo",
+                    "correcta": true
+                },{
+                    "respuesta": "Verde",
+                    "correcta": false
+                },{
+                    "respuesta": "Rojo",
+                    "correcta": false
+                }
             ]
         }
     ]
 }
 
-function jugador(id, nombre = 'Visitor', puntos = 0, posicion = 1, correctas = 0, erroneas = 0, color = getRandomColor()) {
+function jugador(id, nombre, token, puntos = 0, posicion = 1, correctas = 0, erroneas = 0, color = getRandomColor()) {
     this.id = id;
     this.nombre = nombre;
+    this.token = token;
     this.puntos = puntos;
     this.posicion = posicion;
     this.correctas = correctas;
@@ -170,12 +215,17 @@ io.on('connection', function (socket) {
     socket.on("registro", (data) => {
         console.log("New Player");
         if (!game.isActive) {
-            game.jugadores[socket.id] = new jugador(socket.id, data);
+            game.jugadores[socket.id] = new jugador(socket.id, data[0], data[1]);
             game.ordenJugadores.push(socket.id);
-            io.to(socket.id).emit("start", game);
+            io.to(socket.id).emit("Registrado", game);
             io.sockets.emit('pregame-update', game);
         }
     });
+
+    socket.on("Iniciarjuego", (data) => {
+        io.to(socket.id).emit("start", game);
+    });
+
     socket.on("StartGame", (data) => {
         game.jugadorActual = game.owner;
         var next = (game.ordenJugadores).findIndex((el) => el === game.jugadorActual);

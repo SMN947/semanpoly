@@ -4,8 +4,11 @@ $(".desc").html(textos.eslogan);
 $("#roll-button").html(textos.roll_dice);
 $(".sendAnswer").html(textos.sendanswer)
 $("#goSettings").html(textos.settings);
+$(".BtnSaveSettings").html(textos.token_name)
+$("#NameInputLabel").html(textos.input_nickname);
 var sktid = '';
 var firstTime = true;
+var admin = false;
 
 //var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
 var socket = io.connect('http://localhost:8080', { 'forceNew': true });
@@ -13,6 +16,13 @@ var socket = io.connect('http://localhost:8080', { 'forceNew': true });
 socket.on("handshake", (id) => {
     sktid = id;
 });
+socket.on("Registrado", (game) => {
+    $("#Settings").hide();
+    $("#goSettings").html(textos.waiting_for_host);
+});
+function OpenSettings() {
+    $("#Settings").show();
+}
 socket.on("game-update", (game) => {
     //console.clear();
     console.log("GameUpdate")
@@ -21,6 +31,7 @@ socket.on("game-update", (game) => {
 });
 socket.on("YouReAdmin", (data) => {
     alert(textos.admin);
+    admin = true;
 });
 socket.on("start", (game) => {
     if (game.owner == sktid) {
@@ -156,13 +167,35 @@ function sendAnswer() {
 function OptClicked(val) {
     socket.emit("OptClicked", val)
 }
-function Iniciar() {
-    //socket.emit("IAmAdmin", "");
+
+var token = null;
+function Token(tkn) {
+    if (token != null) {
+        $(`#OK${token}`).hide();
+    }
+    $(`#OK${tkn}`).show();
+    token = tkn;
+}
+function SaveNameToken() {
+    var this_token = '';
+    
     var nick = $("#Nick").val();
     if (nick.length >= 3 && nick.length <= 10) {
-        socket.emit("registro", nick);
+        if (token != null) {
+            socket.emit("registro", [nick, token]);
+        } else {
+            alert(textos.token_empty);
+        }
     } else {
         alert(textos.wrong_nickname);
+    }
+}
+function Iniciar() {
+    if (admin) {
+        socket.emit("Iniciarjuego", "")
+        //io.to(socket.id).emit("start", game);
+    } else {
+        alert(textos.not_host)
     }
 }
 
@@ -181,4 +214,15 @@ function RollDice() {
   function toggleClasses(die) {
     die.classList.toggle("odd-roll");
     die.classList.toggle("even-roll");
-  }
+}
+  
+function ShowTutorial() {
+    $("#Tutorial").show(1000);
+}
+
+function HideTutorial() {
+    $("#page-1").click();
+    setTimeout(() => {
+        $("#Tutorial").hide(1000)
+    }, 300);
+}
