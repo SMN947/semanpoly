@@ -84,7 +84,7 @@ var celdas = {
   29:{topic :"Adverbs",position: "right"},
   30:{topic :"Verbs",position: "right"},
   31:{topic :"Simple sentences",position: "right"},
-  32:{topic :"Chance",position: "right"},
+  32:{topic :"Random Question Land",position: "right"},
   33:{topic :"Compound sentences",position: "right"},
   34:{topic :"Complex sentences",position: "right"},
 }
