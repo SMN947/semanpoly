@@ -847,6 +847,8 @@ function getRandomNumber(min = 1, max = 6) {
 }
 
 io.on('connection', function (socket) {
+    
+    game.owner = socket.id;
     console.log("con: " + socket.id);
     io.sockets.emit('pregame-update', game);
     io.to(socket.id).emit("handshake", socket.id);
