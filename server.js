@@ -975,6 +975,7 @@ function CurrentPlayer(action, valor1, valor2) {
             game.jugadores[game.jugadorActual].posicion += (valor1 + valor2);
             //Revisa que no se pase del tablero
             if (game.jugadores[game.jugadorActual].posicion > 34) {
+                game.jugadores[game.jugadorActual].puntos = game.jugadores[game.jugadorActual].puntos + 60;
                 game.jugadores[game.jugadorActual].posicion = game.jugadores[game.jugadorActual].posicion - 34;
             }
             game.dado1 = valor1;
