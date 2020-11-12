@@ -122,6 +122,10 @@
               </div>
         
               <button type="button" id="roll-button" class="roll-btn" onclick="RollDice()">Roll Dice</button>
+              <br>
+              <center style="font-size: 3vw;">
+                Is <span id="CurrentTurn"></span>'s turn.
+              </center>
             </div>
             <div class="logoHolder">
               
@@ -165,7 +169,6 @@
 
   <div id="Tutorial" class="Tutorial hidden">
     <div class="book">
-
       <input type="radio" name="page" id="page-1" checked />
       <label class="page cover" for="page-3">
         <h1>SEMANPOLY<br>
@@ -177,36 +180,54 @@
 
       <input type="radio" name="page" id="page-3" />
       <label class="page" for="page-5">
-        <h2>What is SEMANPOLY</h2>
+        <h2>How to win?</h2>
         <p>
           <img src="https://i.ibb.co/Z8k31pT/Captura-de-pantalla-2020-11-10-222959.png">
         </p>
         <p>
-          Here you will explain what is SEMANPOLY, why this board game, how this will help you to learn in a very interactive way.
+          Move around the board and answer as many questions as possible.
+        </p>
+        <p>
+          The more correct answers you have, the more points you will get.
+        </p>
+        <p>          
+          If you are the first to obtain 1000 points, YOU WIN!
         </p>
       </label>
-    
+      
+      
       <label class="page" for="page-3">
-        <h2>Before Start</h2>
-        <p>Go to the settings section in the bottom-left icon to enter your nick name and choose your token.</p>
-        <img src="https://i.ibb.co/kGkxwSk/settings.png" class="SettingsBTN"> Settings button
+        <h2>Who goes first?</h2>
+        <p>Once all the players are in the room, the order of the play will be chosen at random.</p>
+        <h2>On your turn</h2>
+        <p>
+          <ol>
+            <li>Press the button to roll the dice.</li>
+            <li>The piece will automatically move the number of spaces indicated by the dice.</li>
+            <li>Where did you fall?  Review the spaces section of the instructions.</li>
+          </ol>
+        </p>
+        <h2>Did you roll doubles?</h2>
+        <p>Roll the dice again and take another turn.</p>
+        <h2>Collect 60 points as you pass</h2>
+        <p>If your shot takes you to the starting square or you pass through it, we will give you 60 points.</p>
       </label>
       <input type="radio" name="page" id="page-5" />
       <label class="page" for="page-7">
-        <p>Castles, kings and princesses ...</p>
+        
+        <h2>Random Question Land</h2>
+        <p>Generate a question on a random topic.</p>
+        <h2>Free parking</h2>
+        <p>Keep calm!  Nothing bad happens.</p>
+        <h2>Turn loose</h2>
+        <p>If you land on this box, you must wait and go through a round without playing.</p>
+        <h2>Questions</h2>
+        <p>When you land on a question box you will have one minute to answer, if you answer correctly you will be given the points indicated on the board, if you answer incorrectly you will not get any points.</p>
       </label>
       <label class="page" for="page-5">
-        <p>Love and war ...</p>
+        
       </label>
       <input type="radio" name="page" id="page-7" />
-      <label class="page" for="page-9">
-        <p>Mystery and intrigue ...</p>
-      </label>
-      <label class="page" for="page-7">
-        <p>And ultimately, betrayal.</p>
-        <p>The end.</p>
-      </label>
-      <input type="radio" name="page" id="page-9" />
         <label class="page cover" for="page-11"></label>
         <label class="page cover" for="page-9"></label>
       <input type="radio" name="page" id="page-11" onclick="HideTutorial()"/>

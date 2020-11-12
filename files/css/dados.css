@@ -32,9 +32,9 @@
       "seven eight nine";
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    height: 6vw;
+    height: 8vw;
     padding: 1rem;
-    width: 6vw;
+    width: 8vw;
   }
   .dot {
     align-self: center;

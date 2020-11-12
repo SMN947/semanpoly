@@ -2,6 +2,9 @@ table {
     width: calc( 100vw - 20px );
     height: calc(100vh - 20px );
 }
+#CurrentTurn {
+    /* display: none; */
+}
 .PlayersControl {
     display: none;
     position: absolute;
@@ -44,6 +47,9 @@ table {
         bottom: 0;
         font-size: 3vw;
         background: #6a3d12;
+}
+.question {
+    font-size: 1.5vw;
 }
 .NoBorder td{
     border: none !important;
@@ -132,12 +138,13 @@ td {
     left: 30vw;
 }
 .token {
-    border: solid 1px green;
-    width: 2vw;
-    height: 2vw;
+    border: solid 1px #925114;
+    width: 3vw;
+    height: 3vw;
     display: inline-block;
     margin: .05vw;
     position: relative;
     float: left;
+    background-size: contain !important;
     border-radius:50%;
 }

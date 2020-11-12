@@ -10,8 +10,8 @@ var sktid = '';
 var firstTime = true;
 var admin = false;
 
-var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
-//var socket = io.connect('http://localhost:8080', { 'forceNew': true });
+//var socket = io.connect('https://semanpoly.herokuapp.com', { 'forceNew': true });
+var socket = io.connect('http://localhost:8080', { 'forceNew': true });
 
 socket.on("handshake", (id) => {
     sktid = id;
@@ -128,6 +128,7 @@ function SiguienteJugador() {
 }
 var esEspecial = null;
 function renderGame(game) {
+    $("#CurrentTurn").html(game.jugadores[game.jugadorActual].nombre)
     esEspecial = game;
     for (const key in game.jugadores) {
         if (game.jugadores.hasOwnProperty(key)) {
