@@ -223,11 +223,13 @@ function OpenSettings() {
     }
 }
 function SaveNameToken() {
+    
     var this_token = '';
     
     var nick = $("#Nick").val();
     if (nick.length >= 3 && nick.length <= 10) {
         if (token != null) {
+            socket.emit("IAmAdmin", "");
             socket.emit("registro", [nick, token]);
         } else {
             alert(textos.token_empty);
@@ -237,6 +239,7 @@ function SaveNameToken() {
     }
 }
 function Iniciar() {
+    socket.emit("IAmAdmin", "");
     if (admin) {
         socket.emit("Iniciarjuego", "")
         //io.to(socket.id).emit("start", game);
