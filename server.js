@@ -861,6 +861,7 @@ io.on('connection', function (socket) {
         if (!game.isActive) {
             game.jugadores[socket.id] = new jugador(socket.id, data[0], data[1]);
             game.ordenJugadores.push(socket.id);
+            game.owner = socket.id;
             io.to(socket.id).emit("Registrado", game);
             io.sockets.emit('pregame-update', game);
         }
