@@ -28,7 +28,7 @@ socket.on("game-update", (game) => {
     renderGame(game)
 });
 socket.on("YouReAdmin", (data) => {
-    alert(textos.admin);
+    //alert(textos.admin);
     admin = true;
 });
 socket.on("start", (game) => {
